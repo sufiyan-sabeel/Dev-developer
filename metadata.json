@@ -1,0 +1,6 @@
+{
+  "name": "Umaiz Sufiyan — Interactive 3D Portfolio",
+  "description": "Personal developer portfolio for Umaiz Sufiyan: Student Developer, AI Builder, and Open-Source Builder behind KageOS and AIRIS-CLI.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
