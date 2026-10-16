@@ -1419,27 +1419,37 @@
         white-space: nowrap;
       }
 
-      /* Hero: give the 3D workstation its own visible area BELOW the text
-         instead of a full-bleed layer hidden behind the opaque hero card */
+      /* Hero: compact text block, then the 3D workstation fills the REST of the
+         viewport height so the computer & desk are always visible without scrolling */
       #hero {
-        min-height: auto;
+        min-height: 100vh;
+        min-height: 100svh;
         justify-content: flex-start;
-        padding-top: calc(var(--nav-height) + 12px);
-        padding-bottom: 96px;
+        padding-top: calc(var(--nav-height) + 8px);
+        padding-bottom: 72px;
+        gap: 8px;
       }
-      .hero-content-wrap { order: 1; }
+      .hero-content-wrap { order: 1; flex: 0 0 auto; }
       .hero-canvas-wrap {
         order: 2;
         position: relative;
         top: auto;
         left: auto;
         width: 100%;
-        height: clamp(220px, 34vh, 300px);
-        margin-top: 6px;
+        height: auto;
+        flex: 1 1 auto;
+        min-height: 150px;
+        margin-top: 0;
         border-radius: var(--radius-lg);
         overflow: hidden;
       }
-      .hero-card { max-width: 100%; }
+      .hero-card { max-width: 100%; padding: 16px 15px; }
+      .hero-title { font-size: clamp(1.4rem, 6.6vw, 2rem); line-height: 1.15; margin-bottom: 10px; }
+      .hero-lead { font-size: 0.875rem; line-height: 1.45; margin-bottom: 14px; }
+      .hero-author-pill { margin-bottom: 10px; font-size: 0.7rem; padding: 3px 10px 3px 4px; }
+      .eyebrow { font-size: 0.625rem; letter-spacing: 0.06em; padding: 5px 10px; margin-bottom: 12px; }
+      .hero-buttons { gap: 10px; }
+      .hero-buttons .btn { padding: 8px 12px; font-size: 0.8125rem; }
 
       /* Stop grid/flex children from forcing the layout wider than the viewport */
       .vision-wrap { grid-template-columns: minmax(0, 1fr); }
@@ -2713,6 +2723,12 @@
         applyCameraFit();
       }
       window.addEventListener('resize', handleResize, { passive: true });
+
+      // Keep the renderer/camera in sync when the container's flex height changes
+      // (e.g. after web fonts load), not only on window resize.
+      if (typeof ResizeObserver !== 'undefined') {
+        new ResizeObserver(handleResize).observe(container);
+      }
 
       let lastTime = 0;
       let isVisible = true;
