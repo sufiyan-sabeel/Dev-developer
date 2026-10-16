@@ -1395,7 +1395,9 @@
     /* ==========================================
        MOBILE LAYOUT FIXES
        ========================================== */
-    @media (max-width: 768px), (max-height: 520px) {
+    /* Phone layout — gated on a coarse (touch) pointer so a mouse-driven
+       desktop ALWAYS keeps the original layout, whatever its window size/zoom. */
+    @media (pointer: coarse) and (max-width: 768px), (pointer: coarse) and (max-height: 520px) {
       /* 3D camera control dock — wrap the pills so none are clipped */
       .hero-dock {
         left: 12px;
@@ -2527,7 +2529,8 @@
       const workstationCenter = workstationBounds.getCenter(new THREE.Vector3());
       const DESKTOP_CENTER = new THREE.Vector3(0, 0.85, 0);
 
-      const isMobileViewport = () => window.innerWidth <= 768 || window.innerHeight <= 520;
+      const isMobileViewport = () => window.matchMedia('(pointer: coarse)').matches
+        && (window.innerWidth <= 768 || window.innerHeight <= 520);
       let fitScale = 1;
 
       // Distance factor needed so the whole model fits the current viewport
