@@ -61,6 +61,114 @@
       --transition-smooth: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
+    /* ==========================================
+       WORKSPACE THEMES (visitor-selectable)
+       No attribute = Graphite Blue (the default)
+       ========================================== */
+    html[data-theme="many-color"] {
+      --bg-primary: #0B0A14;
+      --bg-surface: #12101F;
+      --bg-elevated: #1A1730;
+      --bg-card: #171430;
+      --text-primary: #F4F1FF;
+      --text-secondary: #ABA4CC;
+      --text-muted: #746E96;
+      --accent-blue: #A98BFF;
+      --accent-cyan: #FF7AC6;
+      --accent-glow: rgba(169, 139, 255, 0.18);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-medium: rgba(255, 255, 255, 0.14);
+      --border-accent: rgba(169, 139, 255, 0.42);
+    }
+    html[data-theme="many-color"] .lang-fill,
+    html[data-theme="many-color"] #scroll-progress {
+      background: linear-gradient(90deg, #A98BFF, #FF7AC6, #FFD166, #4ADE80, #73DCEB);
+    }
+    html[data-theme="monochrome"] {
+      --bg-primary: #0A0A0B;
+      --bg-surface: #121213;
+      --bg-elevated: #181819;
+      --bg-card: #151516;
+      --text-primary: #F2F2F2;
+      --text-secondary: #A2A2A4;
+      --text-muted: #6E6E70;
+      --accent-blue: #D7D9DD;
+      --accent-cyan: #8E9196;
+      --accent-glow: rgba(255, 255, 255, 0.12);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-medium: rgba(255, 255, 255, 0.14);
+      --border-accent: rgba(255, 255, 255, 0.34);
+    }
+    html[data-theme="warm-dark"] {
+      --bg-primary: #12100E;
+      --bg-surface: #1A1613;
+      --bg-elevated: #231C18;
+      --bg-card: #1E1916;
+      --text-primary: #F7F0E8;
+      --text-secondary: #C2B0A0;
+      --text-muted: #8C7A6A;
+      --accent-blue: #FFB27A;
+      --accent-cyan: #FF8A5B;
+      --accent-glow: rgba(255, 178, 122, 0.16);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-medium: rgba(255, 255, 255, 0.13);
+      --border-accent: rgba(255, 178, 122, 0.4);
+    }
+
+    /* Theme picker (in the nav) */
+    .theme-picker { position: relative; }
+    .theme-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-sm);
+      color: var(--text-secondary);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      transition: var(--transition-smooth);
+    }
+    .theme-btn:hover, .theme-btn[aria-expanded="true"] {
+      color: var(--text-primary);
+      border-color: var(--border-accent);
+    }
+    .theme-btn svg { width: 19px; height: 19px; }
+    .theme-menu {
+      position: absolute;
+      top: calc(100% + 10px);
+      right: 0;
+      z-index: 950;
+      min-width: 210px;
+      padding: 8px;
+      background: rgba(16, 18, 22, 0.98);
+      border: 1px solid var(--border-medium);
+      border-radius: var(--radius-md);
+      box-shadow: 0 18px 44px rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+    .theme-opt {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: var(--radius-sm);
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      text-align: left;
+      transition: var(--transition-smooth);
+    }
+    .theme-opt:hover { background: rgba(255, 255, 255, 0.06); color: var(--text-primary); }
+    .theme-opt[aria-checked="true"] { color: var(--text-primary); background: rgba(255, 255, 255, 0.07); }
+    .theme-opt[aria-checked="true"]::after { content: '\2713'; margin-left: auto; color: var(--accent-blue); }
+    .swatch { width: 14px; height: 14px; border-radius: 4px; border: 1px solid rgba(255, 255, 255, 0.22); flex: none; }
+    .sw-graphite { background: linear-gradient(135deg, #68A9FF, #73DCEB); }
+    .sw-many { background: linear-gradient(135deg, #A98BFF, #FF7AC6, #FFD166); }
+    .sw-mono { background: linear-gradient(135deg, #E6E6E6, #8E9196); }
+    .sw-warm { background: linear-gradient(135deg, #FFB27A, #FF8A5B); }
+
     *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
@@ -1700,6 +1808,32 @@
       text-align: center;
     }
     .repo-more-wrap { text-align: center; margin-top: 22px; }
+
+    /* Real-time project activity */
+    .rt-list { display: flex; flex-direction: column; }
+    .rt-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .rt-item:last-child { border-bottom: none; }
+    .rt-main { min-width: 0; }
+    .rt-name { font-size: 0.9375rem; font-weight: 600; color: var(--text-primary); overflow-wrap: anywhere; }
+    .rt-name a { color: inherit; }
+    .rt-name a:hover { color: var(--accent-blue); }
+    .rt-desc {
+      font-size: 0.8125rem;
+      color: var(--text-secondary);
+      margin-top: 3px;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .rt-time { font-family: var(--font-mono); font-size: 0.6875rem; color: var(--text-muted); white-space: nowrap; flex: none; }
     .dash-note {
       font-size: 0.8125rem;
       color: var(--text-muted);
@@ -1734,6 +1868,114 @@
       .repo-search { grid-column: 1 / -1; }
       .lang-row { grid-template-columns: minmax(0, 84px) minmax(0, 1fr) 40px; gap: 8px; }
       .dash-head { gap: 16px; }
+    }
+
+    /* The nav carries more links now: fall back to the menu on narrower
+       desktops and tighten spacing on medium desktops. (Placed after the
+       base nav rules so it wins the cascade.) */
+    @media (min-width: 861px) and (max-width: 1040px) {
+      .nav-links { display: none; }
+      .mobile-menu-btn { display: flex; }
+    }
+    @media (min-width: 1041px) and (max-width: 1300px) {
+      .nav-links { gap: 16px; }
+      .nav-link { font-size: 0.8125rem; }
+      .logo { font-size: 1rem; }
+      .nav-actions { gap: 10px; }
+    }
+
+    /* ==========================================
+       DEV TERMINAL
+       ========================================== */
+    .term {
+      max-width: 880px;
+      margin: 0 auto;
+      background: #0C0E12;
+      border: 1px solid var(--border-medium);
+      border-radius: var(--radius-lg);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
+      overflow: hidden;
+    }
+    .term-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, 0.03);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .term-dots { display: inline-flex; gap: 6px; }
+    .term-dots i { width: 10px; height: 10px; border-radius: 50%; background: rgba(255, 255, 255, 0.16); }
+    .term-dots i:nth-child(1) { background: #FF5F57; }
+    .term-dots i:nth-child(2) { background: #FEBC2E; }
+    .term-dots i:nth-child(3) { background: #28C840; }
+    .term-title { font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); }
+    .term-body {
+      font-family: var(--font-mono);
+      font-size: 0.8125rem;
+      line-height: 1.7;
+      color: var(--text-secondary);
+      padding: 18px 16px;
+      min-height: 260px;
+      max-height: 46vh;
+      overflow-y: auto;
+      overflow-wrap: anywhere;
+    }
+    .term-line { white-space: pre-wrap; }
+    .term-line.cmd { color: var(--text-primary); }
+    .term-line.ok { color: var(--text-primary); }
+    .term-line.dim { color: var(--text-muted); }
+    .term-line.err { color: #F85149; }
+    .term-line a { color: var(--accent-blue); }
+    .term-line strong { color: var(--text-primary); }
+    .term-form {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      border-top: 1px solid var(--border-subtle);
+      background: rgba(255, 255, 255, 0.02);
+    }
+    .term-prompt { font-family: var(--font-mono); font-size: 0.875rem; color: var(--accent-blue); }
+    .term-input {
+      flex: 1;
+      min-width: 0;
+      background: transparent;
+      border: none;
+      color: var(--text-primary);
+      font-family: var(--font-mono);
+      font-size: 0.875rem;
+      padding: 6px 0;
+    }
+    .term-input:focus { outline: none; }
+    .term-input::placeholder { color: var(--text-muted); }
+    .term-run {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      border-radius: 6px;
+      padding: 7px 12px;
+      transition: var(--transition-smooth);
+    }
+    .term-run:hover { color: var(--text-primary); border-color: var(--border-accent); }
+    .term-chips { display: flex; flex-wrap: wrap; gap: 8px; padding: 0 16px 16px; }
+    .term-chip {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
+      border-radius: 9999px;
+      padding: 6px 12px;
+      transition: var(--transition-smooth);
+    }
+    .term-chip:hover { color: var(--accent-blue); border-color: var(--border-accent); }
+    @media (max-width: 640px) {
+      .term-body { min-height: 220px; max-height: 52vh; padding: 14px 12px; }
+      .term-form { padding: 10px 12px; }
+      .term-chips { padding: 0 12px 14px; }
     }
 
     /* ==========================================
@@ -1838,6 +2080,16 @@
       }
     }
   </style>
+
+  <!-- Apply the visitor's saved theme before first paint (no flash) -->
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('devdev_theme');
+        if (t) document.documentElement.setAttribute('data-theme', t);
+      } catch (e) { /* storage unavailable — default theme is fine */ }
+    })();
+  </script>
 </head>
 <body>
 
@@ -1859,6 +2111,7 @@
           <li><a href="#about" class="nav-link">About</a></li>
           <li><a href="#projects" class="nav-link">Projects</a></li>
           <li><a href="#dashboard" class="nav-link">Dashboard</a></li>
+          <li><a href="#terminal" class="nav-link">Terminal</a></li>
           <li><a href="#skills" class="nav-link">Skills</a></li>
           <li><a href="#vision" class="nav-link">Vision</a></li>
           <li><a href="#contact" class="nav-link">Contact</a></li>
@@ -1866,6 +2119,17 @@
       </nav>
 
       <div class="nav-actions">
+        <div class="theme-picker">
+          <button type="button" class="theme-btn" id="theme-btn" aria-haspopup="true" aria-expanded="false" aria-label="Change workspace theme">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><circle cx="9" cy="9.6" r="1.15" fill="currentColor" stroke="none"></circle><circle cx="15" cy="9.6" r="1.15" fill="currentColor" stroke="none"></circle><circle cx="9.6" cy="15" r="1.15" fill="currentColor" stroke="none"></circle><circle cx="14.6" cy="15.2" r="1.15" fill="currentColor" stroke="none"></circle></svg>
+          </button>
+          <div class="theme-menu" id="theme-menu" role="menu" aria-label="Workspace theme" hidden>
+            <button type="button" class="theme-opt" role="menuitemradio" aria-checked="true" data-theme="graphite-blue"><span class="swatch sw-graphite" aria-hidden="true"></span>Graphite Blue</button>
+            <button type="button" class="theme-opt" role="menuitemradio" aria-checked="false" data-theme="many-color"><span class="swatch sw-many" aria-hidden="true"></span>Many Color</button>
+            <button type="button" class="theme-opt" role="menuitemradio" aria-checked="false" data-theme="monochrome"><span class="swatch sw-mono" aria-hidden="true"></span>Monochrome</button>
+            <button type="button" class="theme-opt" role="menuitemradio" aria-checked="false" data-theme="warm-dark"><span class="swatch sw-warm" aria-hidden="true"></span>Warm Dark</button>
+          </div>
+        </div>
         <a href="https://github.com/sufiyan-sabeel" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" aria-label="Visit GitHub Profile">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
           GitHub
@@ -1883,6 +2147,7 @@
         <li><a href="#about" class="nav-link mobile-nav-item">About</a></li>
         <li><a href="#projects" class="nav-link mobile-nav-item">Projects</a></li>
         <li><a href="#dashboard" class="nav-link mobile-nav-item">Dashboard</a></li>
+        <li><a href="#terminal" class="nav-link mobile-nav-item">Terminal</a></li>
         <li><a href="#skills" class="nav-link mobile-nav-item">Skills</a></li>
         <li><a href="#vision" class="nav-link mobile-nav-item">Vision</a></li>
         <li><a href="#contact" class="nav-link mobile-nav-item">Contact</a></li>
@@ -2154,6 +2419,15 @@
 
         <div class="dash-panel">
           <h3 class="panel-title">
+            Real-time project activity
+            <span class="panel-note">Most recently updated repositories from the GitHub API — refreshed with the dashboard.</span>
+          </h3>
+          <div class="rt-list" id="rt-list"></div>
+          <p class="dash-note" id="rt-fetched">Last fetched: —</p>
+        </div>
+
+        <div class="dash-panel">
+          <h3 class="panel-title">
             Public activity heatmap
             <span class="panel-note">From public GitHub events (last ~90 days). GitHub's full contribution graph needs an authenticated token, so it is not shown here.</span>
           </h3>
@@ -2183,6 +2457,38 @@
             <button type="button" class="btn btn-secondary" id="repo-more">Show all repositories</button>
           </div>
           <p class="dash-note">Data source: GitHub REST API · <a href="https://github.com/sufiyan-sabeel?tab=repositories" target="_blank" rel="noopener noreferrer">View all repositories on GitHub →</a></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         DEV TERMINAL
+         ========================================== -->
+    <section id="terminal">
+      <div class="container">
+        <div style="text-align: center; max-width: 680px; margin: 0 auto 40px auto;">
+          <div class="eyebrow" style="margin-bottom: 16px;">
+            <span class="eyebrow-dot" aria-hidden="true"></span>
+            DEV TERMINAL
+          </div>
+          <h2 class="section-title">Explore by typing, not scrolling.</h2>
+          <p class="section-subtitle" style="margin: 0 auto;">
+            A small interactive shell for my identity, projects and links. Type <strong>help</strong> to begin — the data comes from the same GitHub fetch the dashboard uses, so it costs no extra API calls.
+          </p>
+        </div>
+
+        <div class="term">
+          <div class="term-bar">
+            <span class="term-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="term-title">sufiyan-sabeel@dev-developer: ~</span>
+          </div>
+          <div class="term-body" id="term-body" role="log" aria-live="polite" aria-label="Terminal output"></div>
+          <form class="term-form" id="term-form" autocomplete="off">
+            <label class="term-prompt" for="term-input" aria-hidden="true">$</label>
+            <input class="term-input" id="term-input" type="text" name="cmd" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Terminal command input" placeholder="type a command…">
+            <button class="term-run" type="submit">Run</button>
+          </form>
+          <div class="term-chips" id="term-chips" aria-label="Suggested commands"></div>
         </div>
       </div>
     </section>
@@ -3535,6 +3841,7 @@
     const el = (id) => document.getElementById(id);
     const state = { data: null, fetchedAt: 0, busy: false, timer: null };
     const repoState = { q: '', lang: '', sort: 'updated', limit: 12 };
+    const listeners = [];
 
     const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) =>
       ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
@@ -3704,6 +4011,34 @@
       }).join('');
     }
 
+    /* ---------- render: real-time project activity (recent repository updates) ---------- */
+    function renderRealtime(d) {
+      const box = el('rt-list');
+      const fetched = el('rt-fetched');
+      const stamp = d.fetchedAt || Date.now();
+      if (box) {
+        const repos = (d.repos || []).slice()
+          .sort((a, b) => new Date(b.pushed_at || b.updated_at || 0) - new Date(a.pushed_at || a.updated_at || 0))
+          .slice(0, 6);
+        box.innerHTML = repos.length
+          ? repos.map((r) => {
+              const when = r.pushed_at || r.updated_at;
+              return '<div class="rt-item">' +
+                       '<div class="rt-main">' +
+                         '<div class="rt-name"><a href="' + esc(r.html_url) + '" target="_blank" rel="noopener noreferrer">' + esc(r.name) + '</a></div>' +
+                         '<div class="rt-desc">' + esc(r.description || 'No description provided.') + '</div>' +
+                       '</div>' +
+                       '<div class="rt-time">' + esc(relTime(when)) + '</div>' +
+                     '</div>';
+            }).join('')
+          : '<p class="dash-note">No repository activity available.</p>';
+      }
+      if (fetched) {
+        const iso = new Date(stamp).toISOString();
+        fetched.textContent = 'Last fetched: ' + absTime(iso) + ' · ' + relTime(iso);
+      }
+    }
+
     /* ---------- render: activity heatmap (authentic public events only) ---------- */
     function renderHeatmap(d) {
       const box = el('heatmap');
@@ -3813,9 +4148,11 @@
       if (!state.data) return;
       renderStats(state.data);
       renderActivity(state.data);
+      renderRealtime(state.data);
       renderHeatmap(state.data);
       populateLangFilter(state.data);
       renderRepos();
+      listeners.forEach(function (fn) { try { fn(state.data); } catch (e) {} });
     }
     function skeletons() {
       const g = el('repo-grid');
@@ -3911,6 +4248,340 @@
       schedule();
     }
 
+    // Public hook so the DEV Terminal reuses this same fetched data (no extra API calls)
+    window.DEVDEV = {
+      getData: function () { return state.data; },
+      refresh: function (force) { return load(!!force); },
+      onUpdate: function (fn) {
+        if (typeof fn !== 'function') return;
+        listeners.push(fn);
+        if (state.data) { try { fn(state.data); } catch (e) {} }
+      }
+    };
+
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+    else init();
+  })();
+  </script>
+
+  <script>
+  /* ============================================================
+     WORKSPACE THEME CONTROLLER  +  DEV TERMINAL
+     The terminal reads the SAME data the dashboard already fetched
+     (window.DEVDEV) — it makes no additional GitHub API requests.
+     ============================================================ */
+  (function () {
+    'use strict';
+
+    var el = function (id) { return document.getElementById(id); };
+
+    /* ================= WORKSPACE THEMES ================= */
+    var THEMES = ['graphite-blue', 'many-color', 'monochrome', 'warm-dark'];
+    var THEME_LABEL = {
+      'graphite-blue': 'Graphite Blue',
+      'many-color': 'Many Color',
+      'monochrome': 'Monochrome',
+      'warm-dark': 'Warm Dark'
+    };
+    var THEME_KEY = 'devdev_theme';
+
+    function currentTheme() {
+      return document.documentElement.getAttribute('data-theme') || 'graphite-blue';
+    }
+    function applyTheme(name) {
+      if (THEMES.indexOf(name) < 0) return false;
+      if (name === 'graphite-blue') document.documentElement.removeAttribute('data-theme');
+      else document.documentElement.setAttribute('data-theme', name);
+      try { localStorage.setItem(THEME_KEY, name); } catch (e) { /* storage unavailable */ }
+      syncThemeMenu();
+      return true;
+    }
+    function syncThemeMenu() {
+      var cur = currentTheme();
+      document.querySelectorAll('.theme-opt').forEach(function (b) {
+        b.setAttribute('aria-checked', String(b.getAttribute('data-theme') === cur));
+      });
+    }
+    function initTheme() {
+      var btn = el('theme-btn'), menu = el('theme-menu');
+      if (btn && menu) {
+        btn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          var open = menu.hidden;
+          menu.hidden = !open;
+          btn.setAttribute('aria-expanded', String(open));
+        });
+        document.addEventListener('click', function (e) {
+          if (!menu.hidden && !menu.contains(e.target) && e.target !== btn) {
+            menu.hidden = true;
+            btn.setAttribute('aria-expanded', 'false');
+          }
+        });
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape' && !menu.hidden) {
+            menu.hidden = true;
+            btn.setAttribute('aria-expanded', 'false');
+            btn.focus();
+          }
+        });
+      }
+      document.querySelectorAll('.theme-opt').forEach(function (b) {
+        b.addEventListener('click', function () {
+          applyTheme(b.getAttribute('data-theme'));
+          if (menu) menu.hidden = true;
+          if (btn) btn.setAttribute('aria-expanded', 'false');
+        });
+      });
+      syncThemeMenu();
+    }
+
+    /* ================= DEV TERMINAL ================= */
+    var body = el('term-body');
+    var form = el('term-form');
+    var input = el('term-input');
+    var chipsBox = el('term-chips');
+    var history = [];
+    var histIdx = 0;
+
+    var COMMANDS = [
+      { name: 'help',     desc: 'list every command' },
+      { name: 'about',    desc: 'who I am and what I build' },
+      { name: 'projects', desc: 'list repositories — "projects chess" to search' },
+      { name: 'skills',   desc: 'languages and tools I work with' },
+      { name: 'stats',    desc: 'live GitHub totals from the dashboard data' },
+      { name: 'contact',  desc: 'how to reach me' },
+      { name: 'theme',    desc: 'list or switch theme — "theme warm-dark"' },
+      { name: 'goto',     desc: 'scroll to a section — "goto dashboard"' },
+      { name: 'open',     desc: 'open a repository — "open AIRIS-CLI"' },
+      { name: 'clear',    desc: 'clear the terminal' }
+    ];
+    var SECTIONS = ['hero', 'about', 'projects', 'dashboard', 'terminal', 'skills', 'vision', 'contact'];
+
+    function print(text, cls) {
+      if (!body) return null;
+      var d = document.createElement('div');
+      d.className = 'term-line' + (cls ? ' ' + cls : '');
+      d.textContent = text;
+      body.appendChild(d);
+      body.scrollTop = body.scrollHeight;
+      return d;
+    }
+    function printLink(prefix, url, label) {
+      if (!body) return;
+      var d = document.createElement('div');
+      d.className = 'term-line';
+      d.appendChild(document.createTextNode(prefix));
+      var a = document.createElement('a');
+      a.href = url;
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      a.textContent = label;
+      d.appendChild(a);
+      body.appendChild(d);
+      body.scrollTop = body.scrollHeight;
+    }
+    function safeUrl(u) {
+      return (typeof u === 'string' && /^https:\/\//i.test(u)) ? u : null;
+    }
+    function getData() {
+      return (window.DEVDEV && window.DEVDEV.getData) ? window.DEVDEV.getData() : null;
+    }
+    function needData() {
+      if (getData()) return true;
+      print('GitHub data is still loading. Try again in a moment, or run "refresh".', 'dim');
+      return false;
+    }
+
+    function cmdHelp() {
+      print('Available commands:', 'ok');
+      COMMANDS.forEach(function (c) {
+        var d = document.createElement('div');
+        d.className = 'term-line dim';
+        var s = document.createElement('strong');
+        s.textContent = c.name;
+        d.appendChild(s);
+        d.appendChild(document.createTextNode(' — ' + c.desc));
+        body.appendChild(d);
+      });
+      print('Tip: use the ↑ / ↓ arrow keys for command history.', 'dim');
+    }
+
+    function cmdAbout() {
+      print('Umaiz Sufiyan — Student Developer · AI Builder · Open-Source Developer.', 'ok');
+      print('I build CLI tools, AI experiments and Android apps, and I am the author behind KageOS and AIRIS-CLI.', 'dim');
+      print('This portfolio is a single static index.html deployed on GitHub Pages.', 'dim');
+    }
+
+    function cmdSkills() {
+      print('Areas of focus: AI & CLI tooling, Android (Kotlin), Web & 3D front-end, automation.', 'ok');
+      var d = getData();
+      if (d && d.repos && d.repos.length) {
+        var counts = {};
+        d.repos.forEach(function (r) { if (r.language && !r.fork) counts[r.language] = (counts[r.language] || 0) + 1; });
+        var list = Object.keys(counts).sort(function (a, b) { return counts[b] - counts[a]; });
+        if (list.length) {
+          print('Primary languages across my original repositories (live from the GitHub API):', 'dim');
+          print('  ' + list.map(function (l) { return l + ' (' + counts[l] + ')'; }).join(' · '), 'dim');
+        }
+      } else {
+        print('Run "stats" once GitHub data has loaded for the live language breakdown.', 'dim');
+      }
+    }
+
+    function cmdStats() {
+      if (!needData()) return;
+      var d = getData();
+      var repos = d.repos || [];
+      var stars = 0, forks = 0, langs = {};
+      repos.forEach(function (r) { stars += r.stargazers_count || 0; forks += r.forks_count || 0; });
+      repos.forEach(function (r) { if (r.language && !r.fork) langs[r.language] = 1; });
+      print('Public repositories : ' + repos.length, 'ok');
+      print('Total stars         : ' + stars, 'ok');
+      print('Total forks         : ' + forks, 'ok');
+      print('Languages           : ' + Object.keys(langs).length, 'ok');
+      print('Data last fetched   : ' + new Date(d.fetchedAt || Date.now()).toLocaleString(), 'dim');
+    }
+
+    function cmdProjects(arg) {
+      if (!needData()) return;
+      var d = getData();
+      var repos = (d.repos || []).slice();
+      var q = (arg || '').trim().toLowerCase();
+      if (q) {
+        repos = repos.filter(function (r) {
+          return (r.name || '').toLowerCase().indexOf(q) >= 0 ||
+                 (r.description || '').toLowerCase().indexOf(q) >= 0 ||
+                 (r.language || '').toLowerCase().indexOf(q) >= 0;
+        });
+      } else {
+        repos.sort(function (a, b) {
+          return new Date(b.pushed_at || b.updated_at || 0) - new Date(a.pushed_at || a.updated_at || 0);
+        });
+      }
+      if (!repos.length) {
+        print('No repositories matched "' + arg + '". Try "projects" to list them all.', 'err');
+        return;
+      }
+      print((q ? repos.length + ' match(es) for "' + arg + '"' : 'Most recently updated repositories') + ':', 'ok');
+      repos.slice(0, 8).forEach(function (r) {
+        print('  ' + r.name + '  ·  ' + (r.language || '—') + '  ·  ★ ' + (r.stargazers_count || 0), 'dim');
+      });
+      print('Open one with: open <name>', 'dim');
+    }
+
+    function cmdContact() {
+      print('GitHub handle: @sufiyan-sabeel', 'ok');
+      printLink('Website   : ', 'https://sufiyan-sabeel.github.io/Dev-developer/', 'sufiyan-sabeel.github.io/Dev-developer');
+      printLink('GitHub    : ', 'https://github.com/sufiyan-sabeel', 'github.com/sufiyan-sabeel');
+      printLink('Instagram : ', 'https://www.instagram.com/umaizsufiyan.78/', '@umaizsufiyan.78');
+    }
+
+    function cmdTheme(arg) {
+      var name = (arg || '').trim().toLowerCase();
+      if (!name) {
+        print('Themes (current: ' + THEME_LABEL[currentTheme()] + '):', 'ok');
+        THEMES.forEach(function (t) { print('  ' + t + ' — ' + THEME_LABEL[t], 'dim'); });
+        print('Switch with: theme warm-dark', 'dim');
+        return;
+      }
+      if (applyTheme(name)) print('Theme set to ' + THEME_LABEL[name] + '.', 'ok');
+      else print('Unknown theme "' + arg + '". Options: ' + THEMES.join(', '), 'err');
+    }
+
+    function cmdGoto(arg) {
+      var id = (arg || '').trim().toLowerCase().replace(/^#/, '');
+      if (SECTIONS.indexOf(id) < 0) {
+        print('Unknown section "' + arg + '". Options: ' + SECTIONS.join(', '), 'err');
+        return;
+      }
+      var target = document.getElementById(id);
+      if (!target) { print('Section not found.', 'err'); return; }
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      print('Scrolled to ' + id + '.', 'ok');
+    }
+
+    function cmdOpen(arg) {
+      if (!needData()) return;
+      var q = (arg || '').trim().toLowerCase();
+      if (!q) { print('Usage: open <repository name>', 'dim'); return; }
+      var repos = (getData().repos) || [];
+      var hit = repos.filter(function (r) { return (r.name || '').toLowerCase() === q; })[0]
+             || repos.filter(function (r) { return (r.name || '').toLowerCase().indexOf(q) >= 0; })[0];
+      if (!hit) { print('No repository matched "' + arg + '". Try "projects".', 'err'); return; }
+      var url = safeUrl(hit.html_url);
+      if (!url) { print('That repository has no valid link.', 'err'); return; }
+      print('Opening ' + hit.name + ' …', 'ok');
+      window.open(url, '_blank', 'noopener');
+    }
+
+    function run(raw) {
+      var text = String(raw || '').trim();
+      if (!text) return;
+      print('$ ' + text, 'cmd');
+      history.push(text);
+      histIdx = history.length;
+      var parts = text.split(/\s+/);
+      var name = parts[0].toLowerCase();
+      var arg = text.slice(parts[0].length).trim();
+
+      switch (name) {
+        case 'help': case '?': cmdHelp(); break;
+        case 'about': case 'whoami': cmdAbout(); break;
+        case 'projects': case 'repos': case 'ls': cmdProjects(arg); break;
+        case 'skills': cmdSkills(); break;
+        case 'stats': case 'dashboard': cmdStats(); break;
+        case 'contact': case 'social': cmdContact(); break;
+        case 'theme': cmdTheme(arg); break;
+        case 'goto': case 'cd': cmdGoto(arg); break;
+        case 'open': cmdOpen(arg); break;
+        case 'refresh':
+          if (window.DEVDEV) { window.DEVDEV.refresh(true); print('Refreshing GitHub data…', 'ok'); }
+          break;
+        case 'clear':
+          if (body) body.innerHTML = '';
+          break;
+        default:
+          print('Unknown command: ' + name + '. Type "help" for the list.', 'err');
+      }
+    }
+
+    function initTerminal() {
+      if (!body || !form || !input) return;
+
+      print('DEV TERMINAL — type "help" to see what I can do.', 'ok');
+      print('This shell reads the same GitHub data the dashboard fetches; it makes no extra API calls.', 'dim');
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        run(input.value);
+        input.value = '';
+      });
+
+      input.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowUp' && history.length) {
+          e.preventDefault();
+          histIdx = Math.max(0, histIdx - 1);
+          input.value = history[histIdx] || '';
+        } else if (e.key === 'ArrowDown' && history.length) {
+          e.preventDefault();
+          histIdx = Math.min(history.length, histIdx + 1);
+          input.value = history[histIdx] || '';
+        }
+      });
+
+      if (chipsBox) {
+        ['help', 'about', 'projects', 'skills', 'stats', 'contact', 'theme'].forEach(function (c) {
+          var b = document.createElement('button');
+          b.type = 'button';
+          b.className = 'term-chip';
+          b.textContent = c;
+          b.addEventListener('click', function () { run(c); input.focus(); });
+          chipsBox.appendChild(b);
+        });
+      }
+    }
+
+    function init() { initTheme(); initTerminal(); }
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
     else init();
   })();
