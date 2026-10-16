@@ -1,0 +1,11 @@
+# robots.txt — DEV DEVELOPER portfolio
+# Public site: https://sufiyan-sabeel.github.io/Dev-developer/
+
+User-agent: *
+Allow: /
+
+# Internal duplicate of the homepage used by the Next.js shell — kept out of
+# search results to avoid duplicate content. The public homepage is "/".
+Disallow: /public/
+
+Sitemap: https://sufiyan-sabeel.github.io/Dev-developer/sitemap.xml
