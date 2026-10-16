@@ -8,19 +8,29 @@
   <meta name="keywords" content="Umaiz Sufiyan, KageOS, AIRIS-CLI, Student Developer, AI Builder, Open Source, Portfolio">
   <meta name="author" content="Umaiz Sufiyan">
   <meta name="theme-color" content="#08090B">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <link rel="canonical" href="https://sufiyan-sabeel.github.io/Dev-developer/">
 
-  <!-- Open Graph / Social Sharing -->
+  <!-- Open Graph / Social Sharing (absolute URLs required by crawlers) -->
   <meta property="og:type" content="website">
+  <meta property="og:site_name" content="DEV DEVELOPER">
+  <meta property="og:locale" content="en_IN">
   <meta property="og:title" content="Umaiz Sufiyan — Student Developer · AI Builder">
   <meta property="og:description" content="Building ideas into real software. Explore open-source AI projects, CLI tools, and digital experiments by Umaiz Sufiyan.">
-  <meta property="og:url" content="https://sufiyan-sabeel.github.io/">
-  <meta property="og:image" content="IMG_20260504_142856.png">
+  <meta property="og:url" content="https://sufiyan-sabeel.github.io/Dev-developer/">
+  <meta property="og:image" content="https://sufiyan-sabeel.github.io/Dev-developer/og-image.png">
+  <meta property="og:image:secure_url" content="https://sufiyan-sabeel.github.io/Dev-developer/og-image.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="DEV DEVELOPER — Umaiz Sufiyan, Student Developer and AI Builder">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Umaiz Sufiyan — Student Developer · AI Builder">
   <meta name="twitter:description" content="Building ideas into real software. Explore open-source AI projects and developer tools.">
-  <meta name="twitter:image" content="IMG_20260504_142856.png">
+  <meta name="twitter:image" content="https://sufiyan-sabeel.github.io/Dev-developer/og-image.png">
+  <meta name="twitter:image:alt" content="DEV DEVELOPER — Umaiz Sufiyan, Student Developer and AI Builder">
 
   <!-- Favicon (Inline SVG) -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%2308090B'/><rect x='4' y='4' width='92' height='92' rx='18' fill='%23101216' stroke='%2368A9FF' stroke-width='3'/><text x='50' y='64' font-family='sans-serif' font-size='42' font-weight='800' fill='%23F5F6F7' text-anchor='middle'>S</text></svg>">
@@ -30,8 +40,12 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
-  <!-- Three.js CDN -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <!-- Three.js CDN — pinned version + Subresource Integrity so the browser
+       refuses the file if it is ever tampered with on the CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"
+          integrity="sha384-CI3ELBVUz9XQO+97x6nwMDPosPR5XvsxW2ua7N1Xeygeh1IxtgqtCkGfQY9WWdHu"
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer"></script>
 
   <style>
     /* ==========================================
@@ -1500,6 +1514,10 @@
       color: var(--accent-blue);
     }
 
+    .footer-links { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+    .footer-link { font-size: 0.8125rem; color: var(--text-muted); transition: color 0.2s; }
+    .footer-link:hover { color: var(--accent-blue); }
+
     /* ==========================================
        LIVE GITHUB DASHBOARD
        ========================================== */
@@ -1885,6 +1903,102 @@
     }
 
     /* ==========================================
+       FAQ
+       ========================================== */
+    .faq-list { max-width: 820px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+    .faq-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 4px 20px;
+      transition: var(--transition-smooth);
+    }
+    .faq-item[open] { border-color: var(--border-accent); }
+    .faq-item summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 16px 0;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary::after {
+      content: '+';
+      font-family: var(--font-mono);
+      font-size: 1.25rem;
+      line-height: 1;
+      color: var(--accent-blue);
+      flex: none;
+      transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .faq-item[open] summary::after { transform: rotate(45deg); }
+    .faq-item p { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.7; padding: 0 0 18px; }
+
+    /* ==========================================
+       TESTIMONIALS (placeholders only)
+       ========================================== */
+    .review-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; max-width: 900px; margin: 0 auto; }
+    .review-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      min-width: 0;
+    }
+    .review-card.is-placeholder { border-style: dashed; }
+    .review-card blockquote { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.7; font-style: italic; }
+    .review-card figcaption { display: flex; flex-direction: column; gap: 2px; margin-top: auto; }
+    .review-name { font-size: 0.875rem; font-weight: 600; color: var(--text-primary); }
+    .review-role { font-family: var(--font-mono); font-size: 0.6875rem; color: var(--text-muted); }
+
+    /* ==========================================
+       COOKIE CONSENT BANNER (only if analytics is configured)
+       ========================================== */
+    .consent {
+      position: fixed;
+      left: 16px;
+      right: 16px;
+      bottom: 16px;
+      z-index: 1200;
+      max-width: 620px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      padding: 14px 18px;
+      background: rgba(16, 18, 22, 0.98);
+      border: 1px solid var(--border-medium);
+      border-radius: var(--radius-md);
+      box-shadow: 0 18px 44px rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+    .consent p { font-size: 0.8125rem; color: var(--text-secondary); margin: 0; flex: 1 1 260px; }
+    .consent-actions { display: flex; gap: 8px; flex: none; }
+    .consent button {
+      font-size: 0.8125rem;
+      font-weight: 600;
+      padding: 9px 14px;
+      border-radius: 8px;
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      background: rgba(255, 255, 255, 0.05);
+      transition: var(--transition-smooth);
+    }
+    .consent button:hover { color: var(--text-primary); border-color: var(--border-accent); }
+    .consent button.primary { background: rgba(104, 169, 255, 0.12); border-color: var(--border-accent); color: var(--accent-blue); }
+
+    /* ==========================================
        DEV TERMINAL
        ========================================== */
     .term {
@@ -2101,7 +2215,7 @@
     <div class="container nav-container">
       <a href="#hero" class="logo" aria-label="Umaiz Sufiyan Portfolio Home">
         <!-- User's actual photo in header badge -->
-        <img src="IMG_20260504_142856.png" alt="Umaiz Sufiyan" class="nav-avatar" onerror="this.src='/IMG_20260504_142856.png'; this.onerror=null;">
+        <img src="IMG_20260504_142856.png" alt="" aria-hidden="true" class="nav-avatar" onerror="this.src='/IMG_20260504_142856.png'; this.onerror=null;">
         <span>SUFIYAN<span class="dot">.</span></span>
       </a>
 
@@ -2749,6 +2863,80 @@
     </section>
 
     <!-- ==========================================
+         FAQ
+         Drafted from content already on this site (no questions were supplied).
+         Please confirm the answers before launch and swap in your own questions.
+         ========================================== -->
+    <section id="faq">
+      <div class="container">
+        <div style="text-align: center; max-width: 680px; margin: 0 auto 40px auto;">
+          <div class="eyebrow" style="margin-bottom: 16px;">
+            <span class="eyebrow-dot" aria-hidden="true"></span>
+            FREQUENTLY ASKED
+          </div>
+          <h2 class="section-title">Questions, answered.</h2>
+          <p class="section-subtitle" style="margin: 0 auto;">Short answers to what people usually ask. Anything not covered here is best asked directly.</p>
+        </div>
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary>Who are you, and what do you build?</summary>
+            <p>I&rsquo;m Umaiz Sufiyan, a student developer and AI builder. I work on open-source developer tooling, Android apps and web interfaces, and my main focus is <strong>AIRIS-CLI</strong>, an AI coding and automation CLI.</p>
+          </details>
+          <details class="faq-item">
+            <summary>What is AIRIS-CLI?</summary>
+            <p>AIRIS-CLI stands for Artificial Intelligence Responsive Integrated System &mdash; a command-line assistant for coding, automation and intelligent workflows. My goal is to evolve it into an accessible, robust open-source AI coding and automation platform.</p>
+          </details>
+          <details class="faq-item">
+            <summary>What is KageOS?</summary>
+            <p>KageOS is the umbrella for my developer journey &mdash; a personal ecosystem where experimental ideas, utilities and software concepts are incubated. AIRIS-CLI sits at the centre of it.</p>
+          </details>
+          <details class="faq-item">
+            <summary>What do you work with?</summary>
+            <p>Mostly Kotlin, TypeScript/JavaScript and Python, across AI and CLI tooling, Android apps, and web and 3D front-end work. The live dashboard shows the exact language breakdown across my public repositories.</p>
+          </details>
+          <details class="faq-item">
+            <summary>How does the live dashboard work?</summary>
+            <p>It reads my public repositories from the GitHub REST API in your browser, computes the totals from that response, and caches it for a few minutes. If GitHub is unavailable it keeps showing the last loaded data and says so &mdash; nothing on it is invented.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Are you open to collaboration?</summary>
+            <p>Yes &mdash; I&rsquo;m always happy to connect with other builders, collaborate on open-source initiatives, or talk about AI and developer tooling. The quickest route is through GitHub.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         TESTIMONIALS
+         PLACEHOLDERS ONLY. Do not invent reviews.
+         Replace each card with a real quote from a real person who has
+         given you permission to publish it, then remove the
+         "is-placeholder" class and this comment.
+         ========================================== -->
+    <section id="testimonials">
+      <div class="container">
+        <div style="text-align: center; max-width: 680px; margin: 0 auto 40px auto;">
+          <div class="eyebrow" style="margin-bottom: 16px;">
+            <span class="eyebrow-dot" aria-hidden="true"></span>
+            TESTIMONIALS
+          </div>
+          <h2 class="section-title">What collaborators say.</h2>
+          <p class="section-subtitle" style="margin: 0 auto;">Only real, permission-granted quotes appear here &mdash; never invented ones.</p>
+        </div>
+        <div class="review-grid">
+          <figure class="review-card is-placeholder">
+            <blockquote>Placeholder &mdash; a real testimonial will appear here once someone shares one and gives permission to publish it.</blockquote>
+            <figcaption><span class="review-name">Awaiting a real quote</span><span class="review-role">Not yet provided</span></figcaption>
+          </figure>
+          <figure class="review-card is-placeholder">
+            <blockquote>Placeholder &mdash; a real testimonial will appear here once someone shares one and gives permission to publish it.</blockquote>
+            <figcaption><span class="review-name">Awaiting a real quote</span><span class="review-role">Not yet provided</span></figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
          CONTACT & SOCIAL SECTION
          ========================================== -->
     <section id="contact">
@@ -2822,7 +3010,8 @@
         <span class="footer-credit">Designed &amp; Built by <strong>Umaiz Sufiyan</strong></span>
       </div>
 
-      <div>
+      <div class="footer-links">
+        <a href="privacy.html" class="footer-link">Privacy</a>
         <a href="#hero" class="back-to-top" aria-label="Back to top of page">
           Back to top
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="18 15 12 9 6 15"></polyline></svg>
@@ -4582,6 +4771,82 @@
     }
 
     function init() { initTheme(); initTerminal(); }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+    else init();
+  })();
+  </script>
+
+  <script>
+  /* ============================================================
+     GOOGLE ANALYTICS 4  +  COOKIE CONSENT
+     GA4 stays completely OFF until a Measurement ID is set below.
+     Once set, it loads only after the visitor accepts — never for
+     visitors who declined. No ID + no consent = no analytics request.
+     ============================================================ */
+  (function () {
+    'use strict';
+
+    // 1) Paste your GA4 Measurement ID here (it starts with "G-").
+    //    Leave it empty to keep analytics off entirely.
+    var GA_ID = '';
+
+    var KEY = 'devdev_consent';   // 'granted' | 'denied'
+    var loaded = false;
+
+    function read() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
+    function save(v) { try { localStorage.setItem(KEY, v); } catch (e) {} }
+
+    function loadGA() {
+      if (loaded || !GA_ID) return;
+      loaded = true;
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(GA_ID);
+      document.head.appendChild(s);
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function () { window.dataLayer.push(arguments); };
+      window.gtag('js', new Date());
+      window.gtag('config', GA_ID, { anonymize_ip: true });
+    }
+
+    function banner() {
+      var box = document.createElement('div');
+      box.className = 'consent';
+      box.setAttribute('role', 'dialog');
+      box.setAttribute('aria-label', 'Cookie consent');
+
+      var p = document.createElement('p');
+      p.textContent = 'I use Google Analytics to see which parts of the site are useful. It loads only if you accept. See the privacy policy for details.';
+
+      var actions = document.createElement('div');
+      actions.className = 'consent-actions';
+
+      var accept = document.createElement('button');
+      accept.type = 'button';
+      accept.className = 'primary';
+      accept.textContent = 'Accept';
+      accept.addEventListener('click', function () { save('granted'); loadGA(); box.remove(); });
+
+      var decline = document.createElement('button');
+      decline.type = 'button';
+      decline.textContent = 'Decline';
+      decline.addEventListener('click', function () { save('denied'); box.remove(); });
+
+      actions.appendChild(accept);
+      actions.appendChild(decline);
+      box.appendChild(p);
+      box.appendChild(actions);
+      document.body.appendChild(box);
+    }
+
+    function init() {
+      if (!GA_ID) return;                  // analytics not configured — stay silent
+      var choice = read();
+      if (choice === 'granted') { loadGA(); return; }
+      if (choice === 'denied') return;
+      banner();
+    }
+
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
     else init();
   })();
